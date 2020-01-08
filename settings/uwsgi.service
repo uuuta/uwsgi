@@ -1,0 +1,17 @@
+[Unit]
+Description=uWSGI
+After=syslog.target
+
+[Service]
+WorkingDirectory=/home/uwsgi/server
+ExecStartPre=-/bin/mkdir -p /var/log/uwsgi
+ExecStartPre=-/bin/chown -R uwsgi:uwsgi /var/log/uwsgi
+ExecStart=/home/uwsgi/venv/bin/uwsgi --ini /home/uwsgi/vassals/uwsgi.ini -H /home/uwsgi/venv
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
