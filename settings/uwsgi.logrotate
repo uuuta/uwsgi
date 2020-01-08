@@ -1,0 +1,14 @@
+/var/log/uwsgi/uwsgi.log {
+        daily
+        missingok
+        rotate 52
+        dateext
+        compress
+        delaycompress
+        notifempty
+        create 644 uwsgi uwsgi
+        sharedscripts
+        postrotate
+                touch /home/uwsgi/vassals/logreopen.trigger
+        endscript
+}
